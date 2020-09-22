@@ -1,2 +1,2 @@
 # Reconhecimento
-Aplicativo de Votação 
+Aplicativo de Votação utilizando SignalIR
