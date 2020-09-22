@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 min-vh-100 d-flex flex-column justify-content-center">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mx-auto">
+                    <div class="text-center mb-5">
+                        <h1 class="text-white">Reconhecimento</h1>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-outline-light btn-lg btn-block initVoting" (click)="initVoting('')">Iniciar Votação</button>
+                        <button class="btn btn-outline-light btn-lg btn-block initVoting" (click)="onWatchSession()">Acompanhar Votação</button><
+                    </div>
+                    <div class="text-center" *ngIf="watchSession">
+                        <div class="input-group">
+                            <input class="form-control" #inputSession placeholder="Informe o ID da sessão"/>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" (click)="initVoting(inputSession.value)">Acessar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>    
+    </div>    
+</div>

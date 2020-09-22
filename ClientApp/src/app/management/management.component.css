@@ -1,0 +1,17 @@
+.list-group {
+    overflow-y: auto;
+    max-height: 30rem;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+.close {
+    cursor: pointer;
+}
+
+.inputName {
+    font-weight: 600;
+}

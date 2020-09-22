@@ -1,0 +1,91 @@
+body {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background-color: #00487d;    
+}
+
+.content {
+    margin-top: 10px;
+}
+
+h1 {
+    color: white;
+}
+
+h5, h4 {    
+    font-weight: 800;    
+    font-family: 'Courier New', Courier, monospace
+}
+
+.box-results {    
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+    0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 80px rgba(0, 0, 0, 0.12);    
+
+    min-height: 350px;
+    width: 22rem;   
+    background: white;
+    border-radius: 5px;     
+}
+
+.list-group {
+    overflow-y: auto;
+    max-height: 180px;
+}
+
+.list-group-item {
+    border: none;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
+@keyframes winnerAnimate {
+    from {background-color: white;}
+    to {background-color: yellowgreen;}
+  }
+  
+
+.winner {
+    animation-name: winnerAnimate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;    
+}
+
+@media (min-width: 34em) {
+    .card-columns {
+        -webkit-column-count: 2;
+        -moz-column-count: 2;
+        column-count: 2;
+    }
+}
+
+@media (min-width: 48em) {
+    .card-columns {
+        -webkit-column-count: 3;
+        -moz-column-count: 3;
+        column-count: 3;
+    }
+}
+
+@media (min-width: 62em) {
+    .card-columns {
+        -webkit-column-count: 4;
+        -moz-column-count: 4;
+        column-count: 4;
+    }
+}
+
+@media (min-width: 75em) {
+    .card-columns {
+        -webkit-column-count: 5;
+        -moz-column-count: 5;
+        column-count: 5;
+    }
+}

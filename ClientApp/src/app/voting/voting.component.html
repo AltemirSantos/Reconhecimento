@@ -1,0 +1,46 @@
+<body>
+    <div class="container-fluid">                        
+        <div class="input-group col-md-5 mt-2">
+            <input class="form-control" [value]="getGuidVotings()" #inputSession readonly/>
+            <div class="input-group-append">
+                <button class="btn btn-primary" (click)="copyInputMessage(inputSession)">Copiar</button>
+            </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2 p-2">
+                
+                <div class="card box-results">
+                    <div class="card-header">
+                        <h4 class="text-center">Reconhecimento</h4>    
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group">
+                            <span id="spanVote" *ngFor="let vote of signalRService.votesForCandidate; let i = index">            
+                            <li [ngClass]="{'winner': i === 0}"  class="list-group-item d-flex justify-content-between align-items-center">
+                                <h5> {{i+1}}º {{vote.candidateName}} </h5>                    
+                                <span class="badge badge-success badge-pill"><h6>{{vote.candidateVotes}}</h6></span>
+                            </li>
+                            </span>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <h5 class="text-center">Total de Votos: {{signalRService.votesTotal}} </h5>
+                    </div>
+                    <div class="btn-group p-2" *ngIf="watchSession">
+                        <span class="btn btn-primary" (click)="clear()">Reiniciar</span>        
+                        <span class="btn btn-success" [routerLink]="'/management'" >Candidatos</span>               
+                    </div>
+                </div> 
+            </div>        
+        </div>
+    
+    
+        <div class="row" *ngIf="watchSession" style="background-color: #00487d;">
+            <div class="card-columns p-2">
+                <span *ngFor="let candidate of signalRService.candidates">
+                    <app-card-vote (outputVote)="vote($event)" [candidate]="candidate"></app-card-vote>
+                </span>
+            </div>
+        </div>        
+    </div>
+</body>

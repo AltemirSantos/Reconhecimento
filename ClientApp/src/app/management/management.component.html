@@ -1,0 +1,26 @@
+
+<div class="container" style="padding-top: 10px;"> 
+  <span class="btn btn-info" (click)="returnToVoting()" >Voltar</span>     
+  <div class="d-flex justify-content-center">    
+    <div class="card col-4">
+      <div class="card-body">
+        <div class="mb-2">
+          <div class="input-group">
+            <input type="text" class="form-control inputName" #inputName placeholder="Informe o Nome"/>
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="add(inputName.value)">+</button>
+            </div>
+          </div>
+        </div>
+        <ul class="list-group">
+          <span *ngFor="let item of data;">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <h5 class="text-center">{{item.name}}</h5>
+              <span class="badge badge-danger close" (click)="remove(item)" >X</span>
+            </li>
+          </span>
+        </ul>
+      </div>  
+    </div>
+  </div>
+</div>
