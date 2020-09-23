@@ -1,20 +1,20 @@
-import { Injectable, Inject } from "@angular/core";
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from "rxjs";
-import { Candidate } from "src/models/Candidate";
+import { Observable } from 'rxjs';
+import { Candidate } from 'src/models/Candidate';
 
 @Injectable()
 export class DateManagement {
 
-    baseUrl = "";
-    constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {        
+    baseUrl = '';
+    constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
         this.baseUrl = baseUrl;
     }
 
     httpOptions = {
         headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    }
-    
+    };
+
     public getData(): Observable<Candidate[]> {
 
         return this.http.get<Candidate[]>(this.baseUrl + 'candidate');
@@ -43,14 +43,13 @@ export class DateManagement {
          ]
         return this.data;*/
     }
-    
+
     public add(name: string): Observable<Candidate[]> {
-       let item =  { name: name };       
-       return this.http.post<Candidate[]>(this.baseUrl + 'candidate', JSON.stringify(item), this.httpOptions);        
+       const item =  { name: name };
+       return this.http.post<Candidate[]>(this.baseUrl + 'candidate', JSON.stringify(item), this.httpOptions);
     }
 
     public remove(item: Candidate) : Observable<Candidate[]> {
-       // this.data.splice(index, 1);
-       return this.http.get<Candidate[]>(this.baseUrl + 'candidate/' + item.id);        
+       return this.http.get<Candidate[]>(this.baseUrl + 'candidate/' + item.id);
     }
 }

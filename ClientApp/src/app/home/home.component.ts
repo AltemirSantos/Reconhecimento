@@ -12,11 +12,12 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  watchSession: boolean = false;
-  constructor(private http: HttpClient, 
-              private router : Router) { }
+  watchSession: boolean;
+  constructor(private http: HttpClient,
+              private router: Router) { }
 
   ngOnInit(): void {
+    this.watchSession = false;
   }
 
   initVoting(idSession: string) {
@@ -24,9 +25,9 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['/voting', idSession + '&' + 'watch'], { skipLocationChange: true});
     } else {
       this.http.get(window.location.href + 'voting').subscribe(result => {
-        this.router.navigate(['/voting', result["guid"]], { skipLocationChange: true});
+        this.router.navigate(['/voting', result['guid']], { skipLocationChange: true});
       });
-    }    
+    }
   }
 
   onWatchSession() {

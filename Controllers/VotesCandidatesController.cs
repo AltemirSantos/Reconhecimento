@@ -59,12 +59,12 @@ namespace Reconhecimento.Controllers
 
 
         [HttpGet]
-        [Route("/voting/{votingGuid}")]
+        [Route("reset/{votingGuid}")]
         public async Task<IActionResult> GetVotesForCandidate([FromRoute] string votingGuid)
         {            
             var votingId = await ValidateGuidVoting(votingGuid);
             if (votingId > 0) {         
-              await CountCandidatesVotes(votingGuid, votingId);
+              await ResetCandidatesVotes(votingId);
               return await Task.FromResult(Ok());
             } else {
                 return await Task.FromResult(NoContent());
@@ -87,6 +87,21 @@ namespace Reconhecimento.Controllers
               await _hub.Clients.All.SendAsync("loadVotesCandidates", voting);
 
               return await Task.FromResult(voting);
+        }
+
+         private async Task<List<VotesForCandidate>> ResetCandidatesVotes(int votingId) {
+
+            var voting = await (from votes in voteContext.VotesCandidates
+                                where votes.VotingId == votingId
+                                select votes
+                                ).ToListAsync();
+
+            voteContext.VotesCandidates.RemoveRange(voting);
+            await voteContext.SaveChangesAsync();
+            
+            await _hub.Clients.All.SendAsync("loadVotesCandidates", new List<VotesForCandidate>());
+
+            return await Task.FromResult(new List<VotesForCandidate>());
         }
         private async Task<int> ValidateGuidVoting(string guid)
         {
