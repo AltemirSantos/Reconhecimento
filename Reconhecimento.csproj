@@ -33,7 +33,8 @@
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
-  <Target Name="PrePublishTarget" AfterTargets="Publish">    
+  <Target Name="PrePublishTarget" AfterTargets="Publish">
+    <Exec Command="dotnet tool install --global dotnet-ef" />
     <Exec Command="dotnet ef database update" />
   </Target>
 
