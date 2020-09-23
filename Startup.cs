@@ -17,16 +17,18 @@ namespace Reconhecimento
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            
-            services.AddDbContext<VoteContext>(options => {
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection"));
-            });
-
+        {
+            var connectionString = Environment.GetEnvironmentVariable("DefaultConnection");
+            if (String.IsNullOrEmpty(connectionString)) {
+                connectionString = Configuration.GetConnectionString("DefaultConnection");
+            }
+            services.AddDbContext<VoteContext>(options => {                
+                options.UseNpgsql(connectionString);                
+            });            
             services.AddControllers()
               .AddNewtonsoftJson(x => x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddCors(options => 
